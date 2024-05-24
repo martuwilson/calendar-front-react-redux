@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
@@ -5,6 +6,7 @@ import {addHours} from 'date-fns'
 import { Navbar } from "../"
 import { localizer, getMessagesES } from '../../helpers'
 import { CalendarEvent } from '../components/CalendarEvent'
+import { useState } from 'react'
 
 
 const event = [{
@@ -20,9 +22,11 @@ const event = [{
 }]
 
 export const CalendarPage = () => {
+  //localStorage.getItem('lastView') set to current view or 'week' by default
+  const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week') 
 
   const eventStyleGetter = (event, start, end, isSelected) => {
-    console.log(event, start, end, isSelected)
+
 
     const style = {
       backgroundColor: '#367CF7',
@@ -38,6 +42,18 @@ export const CalendarPage = () => {
   }
 
 
+  const onDoubleClick = (e) => {
+    console.log({doubleClick: e})
+  }
+
+  const onSelectEvent = (e) => {
+    console.log({selectEvent: e})
+  }
+
+  const onViewChanged = (e) => {
+    setLastView(e)
+    localStorage.setItem('lastView', e) // set last view in local storage for later use
+  }
   return (
     <>
       <Navbar/>
@@ -45,6 +61,7 @@ export const CalendarPage = () => {
       culture='es'
       localizer={localizer}
       events={event}
+      defaultView={lastView}
       startAccessor="start"
       endAccessor="end"
       style={{ height: 'calc(100vh - 80px)' }}
@@ -55,6 +72,9 @@ export const CalendarPage = () => {
           event: CalendarEvent,
         }
       }
+      onDoubleClickEvent={onDoubleClick}
+      onSelectEvent={onSelectEvent}
+      onView={onViewChanged}
     />
     </>
   )
