@@ -5,14 +5,15 @@ import { addHours } from "date-fns";
 
 
 const temporalEvent = {
+    _id: new Date().getTime(),
     title: 'Repasar programación',
-    notes: 'My event notes',
+    notes: 'Redux es rarp',
     start: new Date(),
     end: addHours(new Date(), 1),
     bgColor: '#fafafa',
     user: {
       _id: '123',
-      name: 'Fernando',
+      name: 'Martu',
     },
   }
 
@@ -26,32 +27,12 @@ export const calendarSlice = createSlice({
         activeEvent: null
     },
     reducers: {
-        // addEvent: (state, action) => {
-        //     state.events.push(action.payload);
-        // },
-        // updateEvent: (state, action) => {
-        //     state.events = state.events.map(
-        //         e => (e.id === action.payload.id) ? action.payload : e
-        //     );
-        // },
-        // deleteEvent: (state, action) => {
-        //     state.events = state.events.filter(
-        //         e => e.id !== action.payload
-        //     );
-        // },
-        // setActiveEvent: (state, action) => {
-        //     state.activeEvent = action.payload;
-        // },
-        // clearActiveEvent: (state) => {
-        //     state.activeEvent = null;
-        // }
+        onSetActiveEvent: (state, {payload}) => {
+            state.activeEvent = payload;
+        },
     }
 });
 
 export const {
-    addEvent,
-    updateEvent,
-    deleteEvent,
-    setActiveEvent,
-    clearActiveEvent
+    onSetActiveEvent
 } = calendarSlice.actions;
