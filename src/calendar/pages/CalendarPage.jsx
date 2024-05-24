@@ -7,24 +7,13 @@ import { CalendarModal, Navbar } from "../"
 import { localizer, getMessagesES } from '../../helpers'
 import { CalendarEvent } from '../components/CalendarEvent'
 import { useState } from 'react'
-import { useUiStore } from '../../hooks'
+import { useUiStore, useCalendarStore } from '../../hooks'
 
-
-const event = [{
-  title: 'Repasar programación',
-  notes: 'My event notes',
-  start: new Date(),
-  end: addHours(new Date(), 1),
-  bgColor: '#fafafa',
-  user: {
-    _id: '123',
-    name: 'Fernando',
-  },
-}]
 
 export const CalendarPage = () => {
 
   const {openDateModal} = useUiStore()
+  const {events} = useCalendarStore()
 
 
   //localStorage.getItem('lastView') set to current view or 'week' by default
@@ -65,7 +54,7 @@ export const CalendarPage = () => {
       <Calendar
       culture='es'
       localizer={localizer}
-      events={event}
+      events={events}
       defaultView={lastView}
       startAccessor="start"
       endAccessor="end"
