@@ -1,0 +1,6 @@
+estos hooks vienen desde el index.js de store.
+Dentro de store/index es un archivo de barril para reducers.
+
+ejemplo las actions de calendario viene desde store/calendar/calendarSlice. Ahi tenemos el initial state para calendario y los reducers.
+
+desde el hook por ejemplo useCalendarStore, capturamos los states y reducers que viene desde store/calendar/calendarSlice y luego los usamos donde sea necesario

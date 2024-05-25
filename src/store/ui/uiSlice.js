@@ -1,23 +1,22 @@
-// sirve para mentener la informacion del modal. si esta abierto, cerrado, etc
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-        isDateModalOpen: false,
+        isDateModalOpen: false
     },
     reducers: {
-        onOpenDateModal: (state) => {
+        onOpenDateModal: ( state ) => {
             state.isDateModalOpen = true;
         },
-        onCloseDateModal: (state) => {
+        onCloseDateModal: ( state ) => {
             state.isDateModalOpen = false;
-        }
+        },
     }
 });
 
-export const {
-    onOpenDateModal,
-    onCloseDateModal
-} = uiSlice.actions;
+
+// Action creators are generated for each case reducer function
+export const { onOpenDateModal, onCloseDateModal } = uiSlice.actions;
+

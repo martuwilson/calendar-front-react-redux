@@ -1,38 +1,54 @@
-// sirve para mentener la informacion del modal. si esta abierto, cerrado, etc
+import { createSlice } from '@reduxjs/toolkit';
+import { addHours } from 'date-fns';
 
-import { createSlice } from "@reduxjs/toolkit";
-import { addHours } from "date-fns";
-
-
-const temporalEvent = {
+const tempEvent =   {
     _id: new Date().getTime(),
-    title: 'Repasar programación',
-    notes: 'Redux es raro',
+    title: 'Cumpleaños del Jefe',
+    notes: 'Hay que comprar el pastel',
     start: new Date(),
-    end: addHours(new Date(), 1),
+    end: addHours( new Date(), 2 ),
     bgColor: '#fafafa',
     user: {
       _id: '123',
-      name: 'Martu',
-    },
-  }
+      name: 'Fernando'
+    }
+};
 
 
 export const calendarSlice = createSlice({
     name: 'calendar',
     initialState: {
         events: [
-            temporalEvent
+            tempEvent
         ],
         activeEvent: null
     },
     reducers: {
-        onSetActiveEvent: (state, {payload}) => {
+        onSetActiveEvent: ( state, { payload }) => {
             state.activeEvent = payload;
         },
+        onAddNewEvent: ( state, { payload }) => {
+            state.events.push( payload );
+            state.activeEvent = null;
+        },
+        onUpdateEvent: ( state, { payload } ) => {
+            state.events = state.events.map( event => {
+                if ( event._id === payload._id ) {
+                    return payload;
+                }
+
+                return event;
+            });
+        },
+        onDeleteEvent: ( state ) => {
+            if ( state.activeEvent ) {
+                state.events = state.events.filter( event => event._id !== state.activeEvent._id );
+                state.activeEvent = null;
+            }
+        }
     }
 });
 
-export const {
-    onSetActiveEvent
-} = calendarSlice.actions;
+
+// Action creators are generated for each case reducer function
+export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent } = calendarSlice.actions;
