@@ -8,12 +8,12 @@ export const authSlice = createSlice({
         errorMessage: undefined,
     },
     reducers: {
-        onChecking: (state) => {
+        onChecking: (state) => { // this reducer is for when the app is checking the user's authentication status
             state.status = 'checking';
             state.user = {};
             state.errorMessage = undefined;
         },
-        onLogin: (state, {payload}) => {
+        onLogin: (state, {payload}) => { // this reducer is for when the user is authenticated
             state.status = 'authenticated';
             state.user = payload;
             state.errorMessage = undefined;
