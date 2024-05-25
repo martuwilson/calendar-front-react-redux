@@ -7,7 +7,7 @@ import { addHours } from "date-fns";
 const temporalEvent = {
     _id: new Date().getTime(),
     title: 'Repasar programación',
-    notes: 'Redux es rarp',
+    notes: 'Redux es raro',
     start: new Date(),
     end: addHours(new Date(), 1),
     bgColor: '#fafafa',
