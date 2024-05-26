@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {  onAddNewEvent, onDeleteEvent, onLoadEvents, onSetActiveEvent, onUpdateEvent } from '../store';
 import calendarApi from '../api/calendarApi';
 import { convertEventsToDateEvents } from '../helpers';
+import Swal from 'sweetalert2';
 
 
 export const useCalendarStore = () => {
@@ -18,7 +19,7 @@ export const useCalendarStore = () => {
         
         try {
             if( calendarEvent.id ) {
-                // Actualizando
+                // Actualizando evento del calendario
                 await calendarApi.put(`/events/${ calendarEvent.id }`, calendarEvent );
                 dispatch( onUpdateEvent({ ...calendarEvent, user }) );
                 return;
