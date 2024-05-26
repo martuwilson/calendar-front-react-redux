@@ -52,6 +52,33 @@ export const useAuthStore = () => {
         }
     }
 
+    const checkAuthToken = async() => {
+
+        const token = localStorage.getItem('token');
+        if(!token) {
+            dispatch(onLogout());
+            return;
+        }
+
+        try {
+            
+            const { data } = await calendarApi.get('/auth/renew');
+            
+            localStorage.setItem('token', data.token) // hay token y entonces se le asigna el token que se obtuvo
+            localStorage.setItem('token-init-date', new Date().getTime());
+            
+            dispatch(onLogin({
+                name: data.name,
+                uid: data.uid,
+            }));
+
+        } catch (error) {
+            localStorage.clear();
+            dispatch(onLogout()); // no hay token o el token es invalido
+        }
+
+    }
+
 
     return {
         //* Propiedades
@@ -62,5 +89,6 @@ export const useAuthStore = () => {
         //* Metodos
         startLogin,
         startRegister,
+        checkAuthToken,
     }
 }
