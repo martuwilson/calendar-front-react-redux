@@ -19,10 +19,10 @@ export const CalendarPage = () => {
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
 
-    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid );
+    const isMyEvent = ( user.uid === event.user._id ) || ( user.uid === event.user.uid ); // sirve para saber si el evento es mio o no
 
     const style = {
-      backgroundColor: isMyEvent ? '#347CF7' : '#465660',
+      backgroundColor: isMyEvent ? '#347CF7' : '#465660', // si es mio el evento sera azul, si no sera gris
       borderRadius: '0px',
       opacity: 0.8,
       color: 'white'
